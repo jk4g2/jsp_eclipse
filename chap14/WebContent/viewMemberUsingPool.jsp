@@ -22,26 +22,22 @@
 	 		<td>이메일</td>
 	 	</tr>
 	 <%
+	 
 	 	//1. jdbc 드라이버 로딩
-	 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	 	Connection conn = null;
 	 	Statement stmt = null;
 	 	ResultSet rs = null;
 	 	
 	 	try{
-	 		String jdbcDriver = "jdbc:oracle:thin:@localhost:1521:XE";
+	 		String jdbcDriver = "jdbc:apache:commons:dbcp:chap14";
 	 		String dbUser = "hr";
 	 		String dbPass = "hr";
 	 		
 	 		
 	 		String query = "select * from MEMBER2 order by MEMBERID";
-	 		//2. 커넥션생성
 	 		conn = DriverManager.getConnection(jdbcDriver,dbUser,dbPass);
-	 		//3. statement생성
 	 		stmt = conn.createStatement();
-	 		//4. 쿼리 실행
 	 		rs = stmt.executeQuery(query);
-	 		//5. 출력 
 	 		while(rs.next()){
 	 			
 
