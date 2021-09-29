@@ -9,6 +9,7 @@ import jdbc.JdbcUtil;
 import jdbc.connection.ConnectionProvider;
 
 public class DeleteMessageService {
+	//메세ㅐ지를 delete하는 기능
 
 	private static DeleteMessageService instance = new DeleteMessageService();
 	

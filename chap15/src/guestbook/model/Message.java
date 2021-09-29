@@ -1,7 +1,7 @@
 package guestbook.model;
 
 public class Message {
-
+	//DB TABLE들의 컬럼들이 Message의 모델이 되는 객체.
 	private int id;
 	private String guestName;
 	private String password;

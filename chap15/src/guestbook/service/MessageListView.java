@@ -4,6 +4,7 @@ import java.util.List;
 import guestbook.model.Message;
 
 public class MessageListView {
+//요청한 페이지 번호, 요청한 페이지의 메시지 목록, 전체 메시지 개수, 페이지당 보여줄 메세지의 갯수 등의 정보를 담은 클래스
 	private int messageTotalCount;
 	private int currentPageNumber;
 	private List<Message> messageList;
@@ -13,8 +14,9 @@ public class MessageListView {
 	private int endRow;
 	
 	public MessageListView(List<Message> messageList, int messageTotalCount,
-			int currentPageNumber, int messageCountPerPage, 
-			int startRow, int endRow) {
+		int currentPageNumber, int messageCountPerPage, 
+		int startRow, int endRow) {
+		
 		this.messageList = messageList;
 		this.messageTotalCount = messageTotalCount;
 		this.currentPageNumber = currentPageNumber;
@@ -36,7 +38,7 @@ public class MessageListView {
 			}
 		}
 	}
-	 
+	
 	public int getMessageTotalCount() {
 		return messageTotalCount;
 	}

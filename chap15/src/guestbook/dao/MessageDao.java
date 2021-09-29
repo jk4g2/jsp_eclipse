@@ -11,8 +11,11 @@ import java.util.List;
 
 import guestbook.model.Message;
 import jdbc.JdbcUtil;
+// DAO: DATA ACCESS OBJECT
+// 말 그대로 데이터베이스와 가장 가깝게 접촉하는 클래스
 
 public class MessageDao {
+	//singletonPattern
 	public static MessageDao messageDao = new MessageDao();
 	
 	public static MessageDao getInstance() {
@@ -21,6 +24,7 @@ public class MessageDao {
 	
 	private MessageDao() {}
 	
+	//insert니까 return type 은 int가 되고 pstmt객체에 메세지의 정보를 담은 뒤 executeUpdate()을 해준다.
 	public int insert(Connection conn, Message message) throws SQLException{
 		PreparedStatement pstmt = null;
 		try {
@@ -38,6 +42,7 @@ public class MessageDao {
 		}
 	}
 	
+	//메세지 하나를 보여주는 기능
 	public Message select(Connection conn, int messageId) throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -58,6 +63,7 @@ public class MessageDao {
 		
 	}
 	
+	//select에서 받아온 메세지정보를 하나하나 빼주는 메서드.
 	private Message makeMessageFromResultSet(ResultSet rs) throws SQLException{
 		Message message = new Message();
 		message.setId(rs.getInt("message_id"));
@@ -81,6 +87,7 @@ public class MessageDao {
 		}
 	}
 	
+	//모든 메세지들을 볼수있는 기능
 	public List<Message> selectList(Connection conn, int firstRow, int endRow) throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -95,6 +102,7 @@ public class MessageDao {
 			pstmt.setInt(1, firstRow);
 			pstmt.setInt(2, endRow);
 	        rs = pstmt.executeQuery();
+	        
 	        if(rs.next()) {
 	        	List<Message> messageList = new ArrayList<Message>();
 	        	do {
@@ -110,7 +118,7 @@ public class MessageDao {
 		}
 	}
 		
-	
+	//메세지 한개를 삭제하는 기능.
 	public int delete(Connection conn, int messageId) throws SQLException{
 		PreparedStatement pstmt = null;
 		try {
