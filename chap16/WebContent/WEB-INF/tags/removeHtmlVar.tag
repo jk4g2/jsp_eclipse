@@ -14,13 +14,15 @@
 		content=content.trim();//좌우공백을 제거해 준다.
 	}
 	content = content.replaceAll(
-			"<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>",""
+				"<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>",""
 			);//태그제거
-	if(length!=null &&length.intValue()>0 && content.length() > length.intValue()){
+	if(length!=null && length.intValue()>0 && content.length() > length.intValue()){
 		content = content.substring(0,length.intValue());
 		if(trail!=null){
 			content=content+trail;
 		}
 	}
 %>
+
+<!--  -->
 <c:set var="result" value="<%=content %>"/>
