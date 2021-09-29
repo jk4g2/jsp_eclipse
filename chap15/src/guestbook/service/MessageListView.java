@@ -36,7 +36,7 @@ public class MessageListView {
 			}
 		}
 	}
-	
+	 
 	public int getMessageTotalCount() {
 		return messageTotalCount;
 	}
