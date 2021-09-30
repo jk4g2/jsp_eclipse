@@ -11,10 +11,12 @@
 </head>
 <body>
 	<c:set var="dateEL" value="<%=new Date() %>"/>
-	<tf:removeHtmlVar trim="true" var="removed">
+	
+	<tf:removeHtmlVar trim="true" var="removed" vari="hi"> <!-- 던져줄 변수 removed -->
 		<font size="10">현재 <style>시간</style>은 ${dateEL }입니다.</font>
 	</tf:removeHtmlVar>
 	
-	처리결과: ${removed}
+	처리결과: ${removed} 
+	${hi}
 </body>
 </html>

@@ -5,9 +5,13 @@
 <%@ attribute name="trim"%>
 
 <jsp:doBody var="content" scope="page"/>
-<!-- doBody는 태그 안에 있는 몸체 바디내용을 가지고 온다 그래서 변수 content를 String 변수 처럼 사용. -->
+<!-- doBody는 태그 안에 있는 몸체 바디내용을 가지고 온다 
+	 그래서 변수 content를 String 변수 처럼 사용. -->
 <%
 	String content =(String)jspContext.getAttribute("content");
+%>
+
+<% 
 	if(trim!=null && trim.equals("true")){
 		content=content.trim();//좌우공백을 제거해 준다.
 	}
@@ -21,4 +25,4 @@
 		}
 	}
 %>
-<%=content%>
+<%= content %>

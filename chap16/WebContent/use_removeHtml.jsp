@@ -12,7 +12,7 @@
 <body>
 	<c:set var="dateEL" value="<%= new Date()%>" />
 	<tf:removeHtml trim="true">
-		<font size="10">현재 <style>시간</style>은 ${dateEL}입니다.       </font>
+		<font size="10">현재 <style>시간</style>은 ${dateEL}입니다.</font>
 	</tf:removeHtml>	
 	
 	<br>
