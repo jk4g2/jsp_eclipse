@@ -1,4 +1,10 @@
-package mvc.controller;
+ package mvc.controller;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,56 +13,51 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import mvc.command.CommandHandler;
 import mvc.command.NullHandler;
 
-public class ControllerUsingFile extends HttpServlet{
-	private Map<String, CommandHandler> commandHandlerMap = new HashMap<>();
+public class ControllerUsingURI extends HttpServlet{
+	//<커맨드, 핸들러인스턴스> 매핑 정보 저장
+	private Map<String,CommandHandler> commandHandlerMap = new HashMap<>();
 	
-	public void init() throws ServletException {
-		//web.xml에 명시된 configFile을 가지고 옴
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+		System.out.println("checkpoint3");
+		process(request,response);
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+		System.out.println("checkpoint4");
+		process(request,response);
+	}
+	
+	public void init() throws ServletException{
 		String configFile = getInitParameter("configFile");
 		Properties prop = new Properties();
 		String configFilePath = getServletContext().getRealPath(configFile);
 		try(FileReader fis = new FileReader(configFilePath)){
-			prop.load(fis);			
-		}catch(IOException e) {
+			prop.load(fis);
+		}catch(IOException e){
 			throw new ServletException(e);
 		}
-		
 		Iterator keyIter = prop.keySet().iterator();
 		while(keyIter.hasNext()) {
 			String command = (String) keyIter.next();
 			String handlerClassName = prop.getProperty(command);
 			try {
-				System.out.println(handlerClassName);
 				Class<?> handlerClass = Class.forName(handlerClassName);
-				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
-				//<커맨드, 핸들러 인스턴스> 맵핑 정보 저장
+				CommandHandler handlerInstance = (CommandHandler) handlerClass.newInstance();
 				commandHandlerMap.put(command, handlerInstance);
 			}catch(ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-				System.out.println();
 				throw new ServletException(e);
 			}
 		}
 	}
 	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
-		process(request,response);
-	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
-		process(request,response);
-	}
-	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
-		String command = request.getParameter("cmd");
+		String command = request.getRequestURI();
+		if(command.indexOf(request.getRequestURI())==0){
+			command = command.substring(request.getContextPath().length());
+		}
 		
 		CommandHandler handler = commandHandlerMap.get(command);
 		System.out.println("checkpoint1");
@@ -75,4 +76,5 @@ public class ControllerUsingFile extends HttpServlet{
 		}
 
 	}
+	
 }
