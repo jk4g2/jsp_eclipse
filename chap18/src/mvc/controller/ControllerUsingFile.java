@@ -35,7 +35,6 @@ public class ControllerUsingFile extends HttpServlet{
 			String command = (String) keyIter.next();
 			String handlerClassName = prop.getProperty(command);
 			try {
-				System.out.println(handlerClassName);
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
 				//<커맨드, 핸들러 인스턴스> 맵핑 정보 저장

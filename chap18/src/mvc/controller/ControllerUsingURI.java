@@ -60,7 +60,6 @@ public class ControllerUsingURI extends HttpServlet{
 		}
 		
 		CommandHandler handler = commandHandlerMap.get(command);
-		System.out.println("checkpoint1");
 		if(handler == null) {
 			handler = new NullHandler();
 		}
