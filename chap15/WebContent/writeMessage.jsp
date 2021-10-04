@@ -12,6 +12,7 @@
 </jsp:useBean>
 <%
 	WriteMessageService writeService = WriteMessageService.getInstance();
+	
 	writeService.write(message);
 %>
 

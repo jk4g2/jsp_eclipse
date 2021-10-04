@@ -21,6 +21,9 @@ public class GetMessageListService {
 	
 	private static final int MESSAGE_COUNT_PER_PAGE = 3;
 	
+	//GetMessageListService에서 getMessageList() 메서드를 이용해서
+	//list.jsp에서 이 메서드를 사용해서 MessageList를 빼온다.
+	//여기에서는 data type을 주의해야한다.
 	public MessageListView getMessageList(int pageNumber) {
 		Connection conn = null;
 		int currentPageNumber = pageNumber;
@@ -38,9 +41,7 @@ public class GetMessageListService {
 				   //  2        - 1  *           3            + 1
 				
 				endRow = firstRow + MESSAGE_COUNT_PER_PAGE - 1;     // 3  6  9
-				
-				messageList =
-						messageDao.selectList(conn, firstRow, endRow);
+				messageList = messageDao.selectList(conn, firstRow, endRow);
 			}else {
 				currentPageNumber = 0;
 				messageList = Collections.emptyList();
