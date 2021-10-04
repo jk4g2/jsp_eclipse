@@ -57,8 +57,6 @@ public class Member2DAO {
 			stmt = conn.createStatement();
 	        rs = stmt.executeQuery(sql);
 	        if(rs.next()) {
-
-	        	System.out.println("나와야할거" + rs.getString("password"));
 	        	return rs.getString("password");
 	        }else {
 	        	return null;
@@ -73,12 +71,9 @@ public class Member2DAO {
 	
 	public boolean loginValidation(Connection conn, String id,String pw) throws SQLException{
 		//id가 존재할떄
-		System.out.println("나와라 ㅅㅂ:");
 		if(this.selectById(conn, id)!=null) {
 			//id가 존재할떄 패스워드확인
 			if(pw.equals(this.selectPWbyID(conn,id))) {
-				
-				System.out.println(this.selectPWbyID(conn,id));
 				//패스워드 맞으면
 				return true;
 			}else {
@@ -99,10 +94,8 @@ public class Member2DAO {
 			pstmt.setString(1, id);
 	        rs = pstmt.executeQuery();
 	        if(rs.next()) {
-	        	System.out.println("아이디 있는거");
 	        	return getMember2FromResultSet(rs);
 	        }else {
-	        	System.out.println("아이디 없는거");
 	        	return null;
 	        }
 		} finally {

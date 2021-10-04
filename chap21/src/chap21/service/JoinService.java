@@ -16,13 +16,18 @@ public class JoinService {
 	}
 	private JoinService() {}
 	
-	public void join(Member2 member) {
+	public boolean join(Member2 member) {
 		Connection conn = null;
 		try {
 			conn = ConnectionProvider.getConnection();
 			Member2DAO memberDAO = Member2DAO.getInstance();
 			if(!memberDAO.idValidation(conn, member.getMemberID())) {
-				memberDAO.join(conn, member);				
+				
+				//아이디가 존재하지 않을경우.
+				memberDAO.join(conn, member);	
+				return true;
+			}else {
+				return false;
 			}
 		}catch(SQLException e) {
 			throw new ServiceException("회원가입 실패 " + e.getMessage(), e);

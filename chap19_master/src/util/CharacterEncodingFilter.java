@@ -22,7 +22,6 @@ public class CharacterEncodingFilter implements Filter {
 			encoding = "UTF-8";
 		}
 		
-		System.out.println("encoding: " + encoding);
 	}
 	
 	@Override

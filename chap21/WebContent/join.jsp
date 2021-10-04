@@ -15,8 +15,12 @@
 	member.setName(name);
 	member.setEmail(email);
 	JoinService joinservice = JoinService.getInstance();
-	joinservice.join(member);
-%>
+	if(!joinservice.join(member)){
+		System.out.println("다시시도해주세요");
+		response.sendRedirect("joinForm.jsp");
+	}
+	else{%>
+		
 <html>
 <head>
 <meta charset="UTF-8">
@@ -24,6 +28,10 @@
 </head>
 <body>
 	회원가입 성공하셨어요!
-	<a href="/login.jsp">로그인 하러가기~</a>
+	<a href="/chap21/loginForm.jsp">로그인 하러가기~</a>
 </body>
+
 </html>
+<%
+	}
+%>

@@ -19,13 +19,10 @@ public class LoginService {
 		Connection conn = null;
 		conn = ConnectionProvider.getConnection();
 		Member2DAO memberDAO = Member2DAO.getInstance();
-		System.out.println("login: " + "나와라좀");
 		if(memberDAO.loginValidation(conn,id,pw)) {
-			System.out.println("log validated");
 			conn.close();
 			return true;
 		}else {
-			System.out.println("log not");
 			conn.close();
 			return false;
 		}
