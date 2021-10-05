@@ -8,6 +8,12 @@
 </head>
 <body>
 	<%
+		Member2 userID = null;
+		if(session.getAttribute("id")==null){
+			response.sendRedirect("loginForm.jsp");
+		}
+	
+	
 		Member2 sessionData = (Member2)session.getAttribute("id");
 	%>
 	로그인 성공하셨습니다. <%=sessionData.getMemberID() %> 님!
